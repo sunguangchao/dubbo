@@ -67,6 +67,7 @@ public class AbstractLoadBalanceTest {
         invocation.setMethodName("say");
 
         Invoker invoker1 = mock(Invoker.class, Mockito.withSettings().stubOnly());
+        // path 不是 "org.apache.dubbo.registry.RegistryService" 的话，默认权重就是100
         URL url1 = new URL("", "", 0, "DemoService", new HashMap<>());
         url1 = url1.addParameter(REGISTRY_KEY + "." + WEIGHT_KEY, 10);
         given(invoker1.getUrl()).willReturn(url1);
