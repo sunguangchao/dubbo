@@ -24,6 +24,7 @@ import static org.apache.dubbo.rpc.Constants.PROXY_KEY;
 
 /**
  * ProxyFactory. (API/SPI, Singleton, ThreadSafe)
+ *
  */
 @SPI("javassist")
 public interface ProxyFactory {

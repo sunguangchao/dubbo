@@ -116,6 +116,12 @@ public abstract class Wrapper {
         return WRAPPER_MAP.computeIfAbsent(c, Wrapper::makeWrapper);
     }
 
+    /**
+     * 在makeWrapper()内部则是利用ClassGenerator动态生成了一个Wrapper子类并覆写了invokeMethod()方法。
+     * ClassGenerator动态生成类的能力用到了 javassist 框架的字节码生成功能。
+     * @param c
+     * @return
+     */
     private static Wrapper makeWrapper(Class<?> c) {
         if (c.isPrimitive()) {
             throw new IllegalArgumentException("Can not create wrapper for primitive type: " + c);

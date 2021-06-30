@@ -35,6 +35,16 @@ public class JavassistProxyFactory extends AbstractProxyFactory {
         return (T) Proxy.getProxy(interfaces).newInstance(new InvokerInvocationHandler(invoker));
     }
 
+    /**
+     * 不同于JDK的反射实现方式，通过Wrapper的实现方式只有在第一次生成Wrapper的时候才会进行反射。当生成Wrapper以后，由于执行调用逻辑的代码是动态生成的，
+     * 代码的执行过程并不需要进行反射来执行对应的方法，只需要执行动态生成的调用目标方法的逻辑就可以了，效率上会比反射方式更好，
+     * 所以Dubbo的ProxyFactory默认实现用的是JavassistProxyFactory。
+     * @param proxy
+     * @param type
+     * @param url
+     * @param <T>
+     * @return
+     */
     @Override
     public <T> Invoker<T> getInvoker(T proxy, Class<T> type, URL url) {
         // TODO Wrapper cannot handle this scenario correctly: the classname contains '$'

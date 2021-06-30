@@ -35,6 +35,9 @@ import static org.apache.dubbo.rpc.Constants.INTERFACES;
 
 /**
  * AbstractProxyFactory
+ * 在Dubbo的实现中，ProxyFactory接口的实现类有两个，分别是基于 JDK 和 javassist2。这两个方式都用到了反射机制来获取类和方法的运行时信息，
+ * 但是在实现调用逻辑上有些区别：JdkProxyFactory直接用了Java的方式机制来完成目标方法的调用，
+ * 而JavassistProxyFactory则是通过动态生成调用目标方法代码的方式来实现的
  */
 public abstract class AbstractProxyFactory implements ProxyFactory {
     private static final Class<?>[] INTERNAL_INTERFACES = new Class<?>[]{
